@@ -17,9 +17,9 @@ body {
   width: 300px;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: auto;
-  /* margin: 0; */
-  /* position: relative; */
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .box{
