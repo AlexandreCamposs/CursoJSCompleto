@@ -59,7 +59,7 @@ body {
 }
 
 .hide{
-  /* display: none !important; */
+  display: none !important;
 }
 
 #container-scoreboard{
@@ -98,5 +98,5 @@ margin-right: 3px;
   color: #fff;
   background-color: #000;
   padding: 20px;
-  display: none;
+  /* display: none; */
 }
