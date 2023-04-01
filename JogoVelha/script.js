@@ -2,6 +2,7 @@ let x = document.querySelector('.x');
 let o = document.querySelector('.o');
 let boxes = document.querySelectorAll('.box');
 let buttons = document.querySelectorAll('#container-buttons button');
+// console.log(buttons)
 let messageContainer = document.querySelector('#message');
 let messageText = document.querySelector('#message p');
 let secondPlayer;
@@ -12,8 +13,10 @@ let player2 = 0;
 
 //adiciona evento de click aos boxes
 for (i = 0; i < boxes.length; i++) {
+
   //quando alguém clicar na boxes
   boxes[i].addEventListener('click', function () {
+    
     let el = checkEl(player1, player2);
 
     //verifica se a caixa ja foi clicada e tem algum elemento x ou o
@@ -24,6 +27,11 @@ for (i = 0; i < boxes.length; i++) {
       //computa a jogada e alterna o jogador
       if (player1 == player2) {
         player1++;
+        if(secondPlayer == 'ai-player'){
+          // funcao executa a jogada
+          computerPlayer();
+          player2++;
+        }
       } else {
         player2++;
       }
@@ -160,6 +168,25 @@ if(counter == 9){
 
 }
 
+//evento para saber se é 2 player ou IA
+for( let i = 0; i < buttons.length; i++){
+  
+  buttons[i].addEventListener('click', function(){
+
+    secondPlayer = this.getAttribute('id');
+
+    for(j = 0; j < buttons.length; j++){
+      buttons[j].style.display = 'none'
+    }
+    setTimeout(function(){
+      let container = document.querySelector('#container');
+      container.classList.remove('hide')
+      console.log(buttons[i])
+    },500);
+  })
+}
+
+//checa quem venceu
 function winner(winner){
   let scoreboarX = document.querySelector('#scoreboard-1');
   let scoreboarY = document.querySelector('#scoreboard-2');  
@@ -174,7 +201,7 @@ function winner(winner){
   }else{
    msg = 'Deu velha'
   }
-  //exibe msg
+  //exibe msg final da partida
   messageText.innerHTML = msg;
   messageContainer.classList.remove("hide")
 
@@ -183,4 +210,38 @@ function winner(winner){
     messageContainer.classList.add('hide')
   },1000)
   
+  //zera as jogadas
+  player1 = 0;
+  player2 = 0;
+
+  //remove x e o
+  let boxesRemove = document.querySelectorAll('.box div');
+  for(i=0; i < boxesRemove.length; i++){
+    boxesRemove[i].parentNode.removeChild(boxesRemove[i]);
+  } 
+
+}
+
+function computerPlayer(){
+  let cloneO = o.cloneNode(true)
+  let counter = 0;
+  let filled = 0;
+
+  for(i = 0; i < boxes.length; i++){
+    let randomNumber = Math.floor(Math.random() * 5);
+    //só vai preeencher se o filho estiver vazio, funcao recursiva
+    if(boxes[i].childNodes[0] == undefined){
+      if(randomNumber <= 1){
+        boxes[i].appendChild(cloneO);
+        counter++
+        break;
+        //checa quantos estão preenchidas
+      }else{
+        filled++
+      }
+    }
+    if(cloneO == 0 && filled < 9){
+      computerPlayer();
+    }
+  }
 }

@@ -1,8 +1,16 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 body {
   text-align: center;
   font-family: Helvetica, sans-serif;
 }
-
+h1{
+  margin: 5% 5%;
+  color: red;
+}
 /* button player */
 #container-buttons button {
   border: none;
@@ -20,6 +28,7 @@ body {
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
 }
 
 .box{
@@ -99,4 +108,30 @@ margin-right: 3px;
   background-color: #000;
   padding: 20px;
   /* display: none; */
+}
+.height{
+  /* background-color: #000; */
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer{
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  color: #fff;
+  background-color: #000;
+}
+
+@media (max-width: 400px){
+ 
+  #message p{
+    margin-top: 30%;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+  }
 }
