@@ -40,6 +40,22 @@ for (i = 0; i < boxes.length; i++) {
     }
   });
 }
+//evento para saber se é 2 player ou IA
+for( let i = 0; i < buttons.length; i++){
+  
+  buttons[i].addEventListener('click', function(){
+
+    secondPlayer = this.getAttribute('id');
+
+    for(j = 0; j < buttons.length; j++){
+      buttons[j].style.display = 'none'
+    }
+    setTimeout(function(){
+      let container = document.querySelector('#container');
+      container.classList.remove('hide')
+    },500);
+  })
+}
 
 //ver quem vai jogar
 function checkEl(player1, player2) {
@@ -82,7 +98,7 @@ function checkWin() {
     let b6Child = b6.childNodes[0].className;
     if(b4Child == 'x' && b5Child == 'x' && b6Child == 'x'){
       winner('x')
-    }else if(b4Child = 'o' && b5Child == 'o' && b6Child == 'o'){
+    }else if(b4Child == 'o' && b5Child == 'o' && b6Child == 'o'){
       winner('o')
     }
   }
@@ -168,23 +184,7 @@ if(counter == 9){
 
 }
 
-//evento para saber se é 2 player ou IA
-for( let i = 0; i < buttons.length; i++){
-  
-  buttons[i].addEventListener('click', function(){
 
-    secondPlayer = this.getAttribute('id');
-
-    for(j = 0; j < buttons.length; j++){
-      buttons[j].style.display = 'none'
-    }
-    setTimeout(function(){
-      let container = document.querySelector('#container');
-      container.classList.remove('hide')
-      console.log(buttons[i])
-    },500);
-  })
-}
 
 //checa quem venceu
 function winner(winner){
@@ -214,7 +214,7 @@ function winner(winner){
   player1 = 0;
   player2 = 0;
 
-  //remove x e o
+  // remove x e o
   let boxesRemove = document.querySelectorAll('.box div');
   for(i=0; i < boxesRemove.length; i++){
     boxesRemove[i].parentNode.removeChild(boxesRemove[i]);
@@ -232,16 +232,21 @@ function computerPlayer(){
     //só vai preeencher se o filho estiver vazio, funcao recursiva
     if(boxes[i].childNodes[0] == undefined){
       if(randomNumber <= 1){
+        console.log(randomNumber);
         boxes[i].appendChild(cloneO);
         counter++
+        console.log(counter);
         break;
+        // console.log(computerPlayer())
         //checa quantos estão preenchidas
       }else{
         filled++
+        // console.log(computerPlayer())
+        console.log(filled);
       }
     }
     if(cloneO == 0 && filled < 9){
-      computerPlayer();
+      console.log(cloneO);
     }
   }
 }
