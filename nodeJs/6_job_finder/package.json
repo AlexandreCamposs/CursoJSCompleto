@@ -1,0 +1,15 @@
+{
+  "name": "6_job_finder",
+  "version": "1.0.0",
+  "description": "Site de procura de emprego para desenvolvedores",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dev",
+    "job"
+  ],
+  "author": "Alexandre Campos",
+  "license": "(MIT)"
+}
