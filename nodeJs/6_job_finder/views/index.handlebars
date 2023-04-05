@@ -1,0 +1,21 @@
+<main>
+  <div id='jobs-container' class='container'>
+    <div class='row'>
+      <div class='col-md-12'>
+        <h2 id='job-list-title'>Veja as nossas vagas em destaque</h2>
+        <ul id='job-list' class='list-group'>
+         {{#each jobs}}
+            <li class='list-group-item new-job  new-job'>
+              <img src='/img/svg.png' alt='Company' />
+              <p>{{dataValeus.company}}</p>
+              <h2>{{dataValeus.title}}</h2>
+              <p>{{dataValeus.salary}}</p>
+              <span class='new-job-label'>Nova</span>
+              <a class='btn btn-primary'>Ver vagas</a>
+            </li>
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
