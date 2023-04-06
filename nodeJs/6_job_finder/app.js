@@ -5,10 +5,12 @@ const exphbs = require('express-handlebars');
 const db = require('./db/connection');
 const bodyParser = require('body-parser');
 const Job = require('./models/Job');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const PORT = 3000;
 
 app.listen(PORT, function () {
-  console.log(`O express está rodando na porta ${PORT}`);
+  // console.log(`O express está rodando na porta ${PORT}`);
 });
 
 //body parser
@@ -25,24 +27,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 //db connection
 db.authenticate()
   .then(() => {
-    console.log('Conectou ao banco com sucesso');
+    // console.log('Conectou ao banco com sucesso');
   })
-  .catch((err) => ('Ocorreu um erro ao conectar', err));
+  // .catch((err) => ('Ocorreu um erro ao conectar', err));
 
 //routes
-// app.get('/',(req,res)=>{
-//   res.render('index')
-// })
-app.get('/',(req,res)=>{
-  Job.findAll({order:[
-    ['createdAt','DESC']
-  ]})
-  .then(jobs =>{
-    res.render('index',{
-      jobs
+
+app.get('/', (req, res) => {
+  let search = req.query.job;
+  let query = '%'+search+'%'; //PH -> PHP, word -> wordpress, press -> wordpress
+  if (!search) {
+    Job.findAll({ order: 
+      [['createdAt', 'DESC']
+      ]}).then((jobs) => {
+      res.render('index', {
+        jobs,
+      });
     })
-  })
-})
+    // .catch((err) => ('Ocorreu um erro ao conectar', err));
+  } else {
+    Job.findAll({
+      where:{title:{[Op.like]:query}},
+      order: [['createdAt', 'DESC']] 
+      }).then((jobs) => {
+      res.render('index', {
+        jobs, search
+      });
+    })
+    // .catch((err) => ('Ocorreu um erro ao conectar', err));
+  }
+});
+
 
 //jobs routes
 app.use('/jobs', require('./routes/jobs'));
