@@ -113,7 +113,6 @@ function createQuestion(i) {
 
     //inserir a alternativa na tela
     answersbox.appendChild(answerTemplate);
-    console.log(answerTemplate);
 
     //inserir um evento de click no botão
     answerTemplate.addEventListener('click', function () {
@@ -136,7 +135,6 @@ function checkAnswer(btn) {
       if (btn === button) {
         //inclementa os pontos
         points++;
-        console.log(points);
       }
     } else {
       button.classList.add('wrong-answer');
@@ -173,7 +171,6 @@ function showSucessMessage() {
 
   //altera o número de perguntas corretas
   const correctAnswers = document.querySelector('#correct-answer');
-  console.log(correctAnswers);
   correctAnswers.textContent = points;
 
   //altera o número total de perguntas
