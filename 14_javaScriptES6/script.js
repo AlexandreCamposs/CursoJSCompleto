@@ -180,25 +180,43 @@ const carName = { name: 'Gol' };
 const carBrand = { brand: 'vw' };
 const otherInfo = { km: 1000 };
 
-const car = {...carName, ...carBrand, ...otherInfo}
-console.log(car)
+const car = { ...carName, ...carBrand, ...otherInfo };
+console.log(car);
 
+console.log('\n\n\n8-classes');
 
-console.log('\n\n\n8-classes')
-
-class Produto {
-  constructor(name,price){
-    this.name = name
-    this.price = price
+class Product {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
   }
-  productDiscount(discount){
-    return this.price * ((100 - discount) / 100)
+  productWithDiscount(discount) {
+    return this.price * ((100 - discount) / 100);
   }
 }
 
-const shirt = new Produto('camisa', 100)
-console.log(shirt)
+const shirt = new Product('camisa', 100);
+console.log(shirt);
 
-console.log(shirt.productDiscount(50))
+console.log(shirt.productWithDiscount(50));
 
-console.log('\n\n\n8-Herança')
+console.log('\n\n\n8-Herança');
+
+class ProductWithAttribute extends Product {
+  constructor(name, price, colors) {
+    super(name, price);
+    this.colors = colors;
+  }
+  showColors() {
+    console.log('as cores são');
+    this.colors.forEach((color) => {
+      console.log(color);
+    });
+  }
+}
+
+const hat = new ProductWithAttribute('chapeu',29.99,['preto','azul','verde'])
+
+console.log(hat.name);
+console.log(hat.productWithDiscount(30));
+hat.showColors();
