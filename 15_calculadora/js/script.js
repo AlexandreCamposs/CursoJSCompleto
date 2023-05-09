@@ -1,9 +1,6 @@
 const previousOperationText = document.querySelector('#previous-operation');
-console.log(previousOperationText);
 const currentOperationText = document.querySelector('#current-operation');
-console.log(currentOperationText);
 const buttons = document.querySelectorAll('#buttons-container button');
-console.log(buttons);
 
 class Calculator {
   constructor(previousOperationText, currentOperationText) {
@@ -19,7 +16,6 @@ class Calculator {
     }
     this.currentOperation = digit;
     this.updateScreen();
-    console.log(digit);
   }
 
   //Process all calculator operations
@@ -76,7 +72,6 @@ class Calculator {
     current = null,
     previous = null,
   ) {
-    console.log(operationValue, operation, current, previous);
     if (operationValue === null) {
       this.currentOperationText.innerText += this.currentOperation;
     } else {
@@ -122,7 +117,6 @@ class Calculator {
 }
 
 const calc = new Calculator(previousOperationText,currentOperationText);
-console.log(calc)
 
 buttons.forEach((btn)=>{
   btn.addEventListener('click', e =>{
